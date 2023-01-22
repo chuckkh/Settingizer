@@ -66,6 +66,8 @@ private:
     std::atomic<float>* parameterCurrentValue1 = nullptr, * parameterCurrentValue2 = nullptr, * parameterCurrentValue3 = nullptr, * parameterCurrentValue4 = nullptr, * parameterCurrentValue5 = nullptr;
     std::atomic<float>* parameterCC1 = nullptr, * parameterCC2 = nullptr, * parameterCC3 = nullptr, * parameterCC4 = nullptr, * parameterCC5 = nullptr;
     std::atomic<float>*mainControllerValue = nullptr;
+    std::atomic<float>* mainCC = nullptr;
+    std::atomic<float>* mainCurrentValue = nullptr;
 //    std::vector<juce::AudioParameterInt*> allParameters;
     juce::AudioProcessorValueTreeState parameters;
 

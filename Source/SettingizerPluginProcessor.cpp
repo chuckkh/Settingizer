@@ -115,7 +115,19 @@ SettingizerPluginProcessor::SettingizerPluginProcessor()
             0,
             127,
             0),
+            std::make_unique<juce::AudioParameterInt>(
+            "mainCurrent",
+            "Main Current",
+            0,
+            127,
+            0),
 
+            std::make_unique<juce::AudioParameterInt>(
+            "mainCC",
+            "MainCC",
+            0,
+            119,
+            3),
             std::make_unique<juce::AudioParameterInt>(
             "pCC1",
             "CC1",
@@ -146,30 +158,92 @@ SettingizerPluginProcessor::SettingizerPluginProcessor()
             0,
             119,
             74)
-        })
+        }
+        )
 {
-parameterLowerLimit1 = parameters.getRawParameterValue("pLower1");
-parameterLowerLimit2 = parameters.getRawParameterValue("pLower2");
-parameterLowerLimit3 = parameters.getRawParameterValue("pLower3");
-parameterLowerLimit4 = parameters.getRawParameterValue("pLower4");
-parameterLowerLimit5 = parameters.getRawParameterValue("pLower5");
-parameterUpperLimit1 = parameters.getRawParameterValue("pUpper1");
-parameterUpperLimit2 = parameters.getRawParameterValue("pUpper2");
-parameterUpperLimit3 = parameters.getRawParameterValue("pUpper3");
-parameterUpperLimit4 = parameters.getRawParameterValue("pUpper4");
-parameterUpperLimit5 = parameters.getRawParameterValue("pUpper5");
-parameterCurrentValue1 = parameters.getRawParameterValue("pCurrent1");
-parameterCurrentValue2 = parameters.getRawParameterValue("pCurrent2");
-parameterCurrentValue3 = parameters.getRawParameterValue("pCurrent3");
-parameterCurrentValue4 = parameters.getRawParameterValue("pCurrent4");
-parameterCurrentValue5 = parameters.getRawParameterValue("pCurrent5");
-parameterCC1 = parameters.getRawParameterValue("pCC1");
-parameterCC2 = parameters.getRawParameterValue("pCC2");
-parameterCC3 = parameters.getRawParameterValue("pCC3");
-parameterCC4 = parameters.getRawParameterValue("pCC4");
-parameterCC5 = parameters.getRawParameterValue("pCC5");
-mainControllerValue = parameters.getRawParameterValue("mainController");
+    parameterLowerLimit1 = parameters.getRawParameterValue("pLower1");
+    parameterLowerLimit2 = parameters.getRawParameterValue("pLower2");
+    parameterLowerLimit3 = parameters.getRawParameterValue("pLower3");
+    parameterLowerLimit4 = parameters.getRawParameterValue("pLower4");
+    parameterLowerLimit5 = parameters.getRawParameterValue("pLower5");
+    parameterUpperLimit1 = parameters.getRawParameterValue("pUpper1");
+    parameterUpperLimit2 = parameters.getRawParameterValue("pUpper2");
+    parameterUpperLimit3 = parameters.getRawParameterValue("pUpper3");
+    parameterUpperLimit4 = parameters.getRawParameterValue("pUpper4");
+    parameterUpperLimit5 = parameters.getRawParameterValue("pUpper5");
+    parameterCurrentValue1 = parameters.getRawParameterValue("pCurrent1");
+    parameterCurrentValue2 = parameters.getRawParameterValue("pCurrent2");
+    parameterCurrentValue3 = parameters.getRawParameterValue("pCurrent3");
+    parameterCurrentValue4 = parameters.getRawParameterValue("pCurrent4");
+    parameterCurrentValue5 = parameters.getRawParameterValue("pCurrent5");
+    mainCurrentValue = parameters.getRawParameterValue("mainCurrent");
+    mainCC = parameters.getRawParameterValue("mainCC");
+    parameterCC1 = parameters.getRawParameterValue("pCC1");
+    parameterCC2 = parameters.getRawParameterValue("pCC2");
+    parameterCC3 = parameters.getRawParameterValue("pCC3");
+    parameterCC4 = parameters.getRawParameterValue("pCC4");
+    parameterCC5 = parameters.getRawParameterValue("pCC5");
+    mainControllerValue = parameters.getRawParameterValue("mainController");
 }
+
+
+
+           
+
+
+template <typename any>
+void SettingizerPluginProcessor::processMidi(juce::AudioBuffer<any>& buffer, juce::MidiBuffer& midiMessages)
+{
+    buffer.clear();
+    juce::MidiBuffer midiOutput;
+
+    // Here I calculate all the output CC values!!!
+
+    uint8_t current = *mainControllerValue;
+    uint8_t lower1 = *parameterLowerLimit1;
+    uint8_t lower2 = *parameterLowerLimit2;
+    uint8_t lower3 = *parameterLowerLimit3;
+    uint8_t lower4 = *parameterLowerLimit4;
+    uint8_t lower5 = *parameterLowerLimit5;
+    int newVal1 = current * (*parameterUpperLimit1 - lower1) / 127 + lower1;
+    int newVal2 = current * (*parameterUpperLimit2 - lower2) / 127 + lower2;
+    int newVal3 = current * (*parameterUpperLimit3 - lower3) / 127 + lower3;
+    int newVal4 = current * (*parameterUpperLimit4 - lower4) / 127 + lower4;
+    int newVal5 = current * (*parameterUpperLimit5 - lower5) / 127 + lower5;
+    if (current != *mainCurrentValue) {
+        *mainCurrentValue = (float)current;
+        midiOutput.addEvent(juce::MidiMessage::controllerEvent(1, (int)(*mainCC), current), 0);
+    }
+    if (newVal1 != *parameterCurrentValue1) {
+        *parameterCurrentValue1 = (float)newVal1;
+        midiOutput.addEvent(juce::MidiMessage::controllerEvent(1, (int)(*parameterCC1), newVal1), 0);
+    }
+    if (newVal2 != *parameterCurrentValue2) {
+        *parameterCurrentValue2 = (float)newVal2;
+        midiOutput.addEvent(juce::MidiMessage::controllerEvent(1, (int)(*parameterCC2), newVal2), 0);
+    }
+    if (newVal3 != *parameterCurrentValue3) {
+        *parameterCurrentValue3 = (float)newVal3;
+        midiOutput.addEvent(juce::MidiMessage::controllerEvent(1, (int)(*parameterCC3), newVal3), 0);
+    }
+    if (newVal4 != *parameterCurrentValue4) {
+        *parameterCurrentValue4 = (float)newVal4;
+        midiOutput.addEvent(juce::MidiMessage::controllerEvent(1, (int)(*parameterCC4), newVal4), 0);
+    }
+    if (newVal5 != *parameterCurrentValue5) {
+        *parameterCurrentValue5 = (float)newVal5;
+        midiOutput.addEvent(juce::MidiMessage::controllerEvent(1, (int)(*parameterCC5), newVal5), 0);
+    }
+
+
+    //    juce::MidiMessage msg = { 176, 10, dummyValue };
+    //    juce::MidiMessage msg = juce::MidiMessage::controllerEvent(1, 10, dummyValue);
+    //    dummyValue++;
+    //    dummyValue %= 120;
+    //    midiOutput.addEvent(msg, 0);
+    midiMessages.swapWith(midiOutput);
+}
+
 
 SettingizerPluginProcessor::~SettingizerPluginProcessor()
 {
@@ -271,54 +345,6 @@ void SettingizerPluginProcessor::processBlock(juce::AudioBuffer<double>& buffer,
     processMidi(buffer, midiMessages);
 }
 
-template <typename any>
-void SettingizerPluginProcessor::processMidi(juce::AudioBuffer<any>& buffer, juce::MidiBuffer& midiMessages)
-{
-    buffer.clear();
-    juce::MidiBuffer midiOutput;
-
-    // Here I calculate all the output CC values!!!
-    uint8_t current = mainControllerValue->get();
-    uint8_t lower1 = parameterLowerLimit1->get();
-    uint8_t lower2 = parameterLowerLimit2->get();
-    uint8_t lower3 = parameterLowerLimit3->get();
-    uint8_t lower4 = parameterLowerLimit4->get();
-    uint8_t lower5 = parameterLowerLimit5->get();
-    int newVal1 = current * (parameterUpperLimit1->get() - lower1) / 127 + lower1;
-    int newVal2 = current * (parameterUpperLimit2->get() - lower2) / 127 + lower2;
-    int newVal3 = current * (parameterUpperLimit3->get() - lower3) / 127 + lower3;
-    int newVal4 = current * (parameterUpperLimit4->get() - lower4) / 127 + lower4;
-    int newVal5 = current * (parameterUpperLimit5->get() - lower5) / 127 + lower5;
-    if (newVal1 != parameterCurrentValue1->get()) {
-        *parameterCurrentValue1 = (float)newVal1;
-        midiOutput.addEvent(juce::MidiMessage::controllerEvent(1, (int)parameterCC1->get(), newVal1), 0);
-    }
-    if (newVal2 != parameterCurrentValue2->get()) {
-        *parameterCurrentValue2 = (float)newVal2;
-        midiOutput.addEvent(juce::MidiMessage::controllerEvent(1, (int)parameterCC2->get(), newVal2), 0);
-    }
-    if (newVal3 != parameterCurrentValue3->get()) {
-        *parameterCurrentValue3 = (float)newVal3;
-        midiOutput.addEvent(juce::MidiMessage::controllerEvent(1, (int)parameterCC3->get(), newVal3), 0);
-    }
-    if (newVal4 != parameterCurrentValue4->get()) {
-        *parameterCurrentValue4 = (float)newVal4;
-        midiOutput.addEvent(juce::MidiMessage::controllerEvent(1, (int)parameterCC4->get(), newVal4), 0);
-    }
-    if (newVal5 != parameterCurrentValue5->get()) {
-        *parameterCurrentValue5 = (float)newVal5;
-        midiOutput.addEvent(juce::MidiMessage::controllerEvent(1, (int)parameterCC5->get(), newVal5), 0);
-    }
-
-
-//    juce::MidiMessage msg = { 176, 10, dummyValue };
-//    juce::MidiMessage msg = juce::MidiMessage::controllerEvent(1, 10, dummyValue);
-//    dummyValue++;
-//    dummyValue %= 120;
-//    midiOutput.addEvent(msg, 0);
-    midiMessages.swapWith(midiOutput);
-
-}
 
 //==============================================================================
 bool SettingizerPluginProcessor::hasEditor() const
