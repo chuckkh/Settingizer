@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="Pawiih" name="Settingizer" projectType="audioplug" useAppConfig="0"
+              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" companyName="CloudInTheHeads"
+              pluginFormats="buildAAX,buildAU,buildLV2,buildVST3" pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn">
+  <MAINGROUP id="ksP35K" name="Settingizer">
+    <GROUP id="{13E29CE5-13D8-1362-51FA-0D63F903C26D}" name="Source">
+      <FILE id="EFHEql" name="SettingizerPluginProcessor.cpp" compile="1"
+            resource="0" file="Source/SettingizerPluginProcessor.cpp"/>
+      <FILE id="VrsQBF" name="SettingizerPluginProcessor.h" compile="0" resource="0"
+            file="Source/SettingizerPluginProcessor.h"/>
+      <FILE id="taQmaW" name="SettingizerPluginEditor.cpp" compile="1" resource="0"
+            file="Source/SettingizerPluginEditor.cpp"/>
+      <FILE id="kuyQpJ" name="SettingizerPluginEditor.h" compile="0" resource="0"
+            file="Source/SettingizerPluginEditor.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
+  <EXPORTFORMATS>
+    <VS2019 targetFolder="Builds/VisualStudio2019">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="Settingizer"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="Settingizer"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../../JUCE-for-Rationale/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../../JUCE-for-Rationale/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../../JUCE-for-Rationale/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../../JUCE-for-Rationale/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../../JUCE-for-Rationale/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../../JUCE-for-Rationale/modules"/>
+        <MODULEPATH id="juce_core" path="../../../JUCE-for-Rationale/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../JUCE-for-Rationale/modules"/>
+        <MODULEPATH id="juce_events" path="../../../JUCE-for-Rationale/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../../JUCE-for-Rationale/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../../JUCE-for-Rationale/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../../JUCE-for-Rationale/modules"/>
+      </MODULEPATHS>
+    </VS2019>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+</JUCERPROJECT>
