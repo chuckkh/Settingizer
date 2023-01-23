@@ -4,11 +4,17 @@
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" companyName="CloudInTheHeads"
               pluginFormats="buildAAX,buildAU,buildLV2,buildVST3" pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn">
   <MAINGROUP id="ksP35K" name="Settingizer">
-    <GROUP id="{742AB51D-08EA-FF51-507D-AE6AFFD6C27E}" name="BinaryAssets">
-      <FILE id="rgWNdv" name="BinaryData.cpp" compile="1" resource="0" file="BinaryAssets/BinaryData.cpp"/>
-      <FILE id="i7cxV0" name="BinaryData.h" compile="0" resource="0" file="BinaryAssets/BinaryData.h"/>
-    </GROUP>
     <GROUP id="{13E29CE5-13D8-1362-51FA-0D63F903C26D}" name="Source">
+      <GROUP id="{A6146090-09A6-AC45-B6DC-54240A37C1D0}" name="Graphics">
+        <FILE id="P20n0j" name="SettingizerLookAndFeel.cpp" compile="1" resource="0"
+              file="Source/Graphics/SettingizerLookAndFeel.cpp"/>
+        <FILE id="EKQhNy" name="SettingizerLookAndFeel.h" compile="0" resource="0"
+              file="Source/Graphics/SettingizerLookAndFeel.h"/>
+      </GROUP>
+      <GROUP id="{A38A2813-FAD9-6FC7-4398-D4F6C35CDF59}" name="BinaryAssets">
+        <FILE id="ajVYMq" name="BinaryData.cpp" compile="1" resource="0" file="Source/BinaryAssets/BinaryData.cpp"/>
+        <FILE id="B6mNYY" name="BinaryData.h" compile="0" resource="0" file="Source/BinaryAssets/BinaryData.h"/>
+      </GROUP>
       <FILE id="EFHEql" name="SettingizerPluginProcessor.cpp" compile="1"
             resource="0" file="Source/SettingizerPluginProcessor.cpp"/>
       <FILE id="VrsQBF" name="SettingizerPluginProcessor.h" compile="0" resource="0"
