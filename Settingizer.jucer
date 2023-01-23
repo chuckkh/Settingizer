@@ -4,6 +4,10 @@
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" companyName="CloudInTheHeads"
               pluginFormats="buildAAX,buildAU,buildLV2,buildVST3" pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn">
   <MAINGROUP id="ksP35K" name="Settingizer">
+    <GROUP id="{742AB51D-08EA-FF51-507D-AE6AFFD6C27E}" name="BinaryAssets">
+      <FILE id="rgWNdv" name="BinaryData.cpp" compile="1" resource="0" file="BinaryAssets/BinaryData.cpp"/>
+      <FILE id="i7cxV0" name="BinaryData.h" compile="0" resource="0" file="BinaryAssets/BinaryData.h"/>
+    </GROUP>
     <GROUP id="{13E29CE5-13D8-1362-51FA-0D63F903C26D}" name="Source">
       <FILE id="EFHEql" name="SettingizerPluginProcessor.cpp" compile="1"
             resource="0" file="Source/SettingizerPluginProcessor.cpp"/>
