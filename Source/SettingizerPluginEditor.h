@@ -22,12 +22,24 @@ class SettingizerPluginEditor
     public juce::Slider::Listener
 {
 public:
+    typedef juce::AudioProcessorValueTreeState::SliderAttachment SliderAttachment;
+    typedef juce::AudioProcessorValueTreeState::ButtonAttachment ButtonAttachment;
+    typedef juce::AudioProcessorValueTreeState::ComboBoxAttachment ComboBoxAttachment;
+
     SettingizerPluginEditor (SettingizerPluginProcessor&, juce::AudioProcessorValueTreeState&);
     ~SettingizerPluginEditor() override;
 
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
+    void setUpChannelBox(juce::ComboBox*, juce::AudioProcessorValueTreeState&, juce::String,
+        std::unique_ptr<ComboBoxAttachment>&);
+    void setUpCCBox(juce::ComboBox*, juce::AudioProcessorValueTreeState&, juce::String,
+        std::unique_ptr<ComboBoxAttachment>&);
+    void setUpVSlider(juce::Slider*, juce::AudioProcessorValueTreeState&, juce::String,
+        std::unique_ptr<SliderAttachment>&);
+    void setUpHSlider(juce::Slider*, juce::AudioProcessorValueTreeState&, juce::String,
+        std::unique_ptr<SliderAttachment>&);
 
 private:
     // This reference is provided as a quick way for your editor to
@@ -40,14 +52,11 @@ private:
     void sliderValueChanged(juce::Slider*) override;
     void comboBoxChanged(juce::ComboBox*) override;
 
-    typedef juce::AudioProcessorValueTreeState::SliderAttachment SliderAttachment;
-    typedef juce::AudioProcessorValueTreeState::ButtonAttachment ButtonAttachment;
-    typedef juce::AudioProcessorValueTreeState::ComboBoxAttachment ComboAttachment;
 
-    juce::ComboBox channelSelector1, channelSelector2, channelSelector3, channelSelector4, channelSelector5, channelSelectorMain;
     juce::ComboBox ccSelector1, ccSelector2, ccSelector3, ccSelector4, ccSelector5, ccSelectorMain;
     juce::Slider leftSlider1, leftSlider2, leftSlider3, leftSlider4, leftSlider5;
     juce::Slider rightSlider1, rightSlider2, rightSlider3, rightSlider4, rightSlider5;
+    juce::Slider currentSlider1, currentSlider2, currentSlider3, currentSlider4, currentSlider5;
     juce::Slider mainSlider;
 
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> channelSelectorAttach1, channelSelectorAttach2, channelSelectorAttach3, channelSelectorAttach4, channelSelectorAttach5, channelSelectorAttachMain;
