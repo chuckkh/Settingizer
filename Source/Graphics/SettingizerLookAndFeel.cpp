@@ -10,7 +10,13 @@
 
 #include "SettingizerLookAndFeel.h"
 
-void SettingizerLookAndFeel::drawLinearSliderThumb (Graphics& g, int x, int y, int width, int height, float sliderPos, float minSliderPos, float maxSliderPos, const Slider::SliderStyle, Slider& slider)
+void SettingizerLookAndFeel::drawLinearSliderThumb (juce::Graphics& g, int x, int y, int width, int height, float sliderPos, float minSliderPos, float maxSliderPos, const juce::Slider::SliderStyle style, juce::Slider& slider)
 {
-    g.drawImage(hSliderKnob, slider.getLocalBounds().toFloat());
+    if (style == juce::Slider::LinearHorizontal)
+    {
+        g.drawImage(hSliderKnob, slider.getLocalBounds().toFloat());
+        g.setColour(juce::Colours::white);
+        g.setFont(15.0f);
+        g.drawFittedText("KNOB", slider.getLocalBounds(), juce::Justification::centred, 1);
+    }
 }

@@ -29,6 +29,7 @@ SettingizerPluginEditor::SettingizerPluginEditor (SettingizerPluginProcessor& p,
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> rightSliderAttach1, rightSliderAttach2, rightSliderAttach3, rightSliderAttach4, rightSliderAttach5;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mainSliderAttach;
     */
+    setUpCCBox(&ccSelectorMain, vts, "mainCC", ccSelectorAttachMain);
     setUpCCBox(&ccSelector1, vts, "pCC1", ccSelectorAttach1);
     setUpCCBox(&ccSelector2, vts, "pCC2", ccSelectorAttach2);
     setUpCCBox(&ccSelector3, vts, "pCC3", ccSelectorAttach3);
@@ -66,11 +67,12 @@ void SettingizerPluginEditor::paint (juce::Graphics& g)
 
 void SettingizerPluginEditor::resized()
 {
-    ccSelector1.setBounds(10, 10, 60, 25);
-    ccSelector2.setBounds(10, 40, 60, 25);
-    ccSelector3.setBounds(10, 70, 60, 25);
-    ccSelector4.setBounds(10, 100, 60, 25);
-    ccSelector5.setBounds(10, 130, 60, 25);
+    ccSelectorMain.setBounds(5, 10, 60, 30);
+    ccSelector1.setBounds(10, 50, 60, 25);
+    ccSelector2.setBounds(10, 80, 60, 25);
+    ccSelector3.setBounds(10, 110, 60, 25);
+    ccSelector4.setBounds(10, 140, 60, 25);
+    ccSelector5.setBounds(10, 170, 60, 25);
     leftSlider1.setBounds(100, 10, 25, 280);
     leftSlider2.setBounds(130, 10, 25, 280);
     leftSlider3.setBounds(160, 10, 25, 280);
@@ -245,7 +247,7 @@ void SettingizerPluginEditor::setUpVSlider(juce::Slider* slider, juce::AudioProc
     std::unique_ptr<SliderAttachment>& attachment)
 {
     addAndMakeVisible(slider);
-    slider->setTextBoxStyle(juce::Slider::NoTextBox, true, 0, 0);
+    slider->setTextBoxStyle(juce::Slider::TextBoxBelow, true, 0, 0);
     slider->setSliderStyle(juce::Slider::LinearVertical);
     attachment.reset(new SliderAttachment(vts, paramId, *slider));
     slider->addListener(this);
@@ -255,7 +257,7 @@ void SettingizerPluginEditor::setUpHSlider(juce::Slider* slider, juce::AudioProc
     std::unique_ptr<SliderAttachment>& attachment)
 {
     addAndMakeVisible(slider);
-    slider->setTextBoxStyle(juce::Slider::NoTextBox, true, 0, 0);
+    slider->setTextBoxStyle(juce::Slider::TextBoxBelow, true, 0, 0);
     slider->setSliderStyle(juce::Slider::LinearHorizontal);
     attachment.reset(new SliderAttachment(vts, paramId, *slider));
     slider->addListener(this);
