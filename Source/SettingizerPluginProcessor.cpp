@@ -125,38 +125,38 @@ SettingizerPluginProcessor::SettingizerPluginProcessor()
             std::make_unique<juce::AudioParameterInt>(
             "mainCC",
             "MainCC",
-            0,
-            119,
+            1,
+            120,
             3),
             std::make_unique<juce::AudioParameterInt>(
             "pCC1",
             "CC1",
-            0,
-            119,
+            1,
+            120,
             1),
             std::make_unique<juce::AudioParameterInt>(
             "pCC2",
             "CC2",
-            0,
-            119,
+            1,
+            120,
             7),
             std::make_unique<juce::AudioParameterInt>(
             "pCC3",
             "CC3",
-            0,
-            119,
+            1,
+            120,
             10),
             std::make_unique<juce::AudioParameterInt>(
             "pCC4",
             "CC4",
-            0,
-            119,
+            1,
+            120,
             11),
             std::make_unique<juce::AudioParameterInt>(
             "pCC5",
             "CC5",
-            0,
-            119,
+            1,
+            120,
             74)
         }
         )
@@ -212,27 +212,27 @@ void SettingizerPluginProcessor::processMidi(juce::AudioBuffer<any>& buffer, juc
     int newVal5 = current * (*parameterUpperLimit5 - lower5) / 127 + lower5;
     if (current != *mainCurrentValue) {
         *mainCurrentValue = (float)current;
-        midiOutput.addEvent(juce::MidiMessage::controllerEvent(1, (int)(*mainCC), current), 0);
+        midiOutput.addEvent(juce::MidiMessage::controllerEvent(1, (int)(*mainCC) % 120, current), 0);
     }
     if (newVal1 != *parameterCurrentValue1) {
         *parameterCurrentValue1 = (float)newVal1;
-        midiOutput.addEvent(juce::MidiMessage::controllerEvent(1, (int)(*parameterCC1), newVal1), 0);
+        midiOutput.addEvent(juce::MidiMessage::controllerEvent(1, (int)(*parameterCC1) % 120, newVal1), 0);
     }
     if (newVal2 != *parameterCurrentValue2) {
         *parameterCurrentValue2 = (float)newVal2;
-        midiOutput.addEvent(juce::MidiMessage::controllerEvent(1, (int)(*parameterCC2), newVal2), 0);
+        midiOutput.addEvent(juce::MidiMessage::controllerEvent(1, (int)(*parameterCC2) % 120, newVal2), 0);
     }
     if (newVal3 != *parameterCurrentValue3) {
         *parameterCurrentValue3 = (float)newVal3;
-        midiOutput.addEvent(juce::MidiMessage::controllerEvent(1, (int)(*parameterCC3), newVal3), 0);
+        midiOutput.addEvent(juce::MidiMessage::controllerEvent(1, (int)(*parameterCC3) % 120, newVal3), 0);
     }
     if (newVal4 != *parameterCurrentValue4) {
         *parameterCurrentValue4 = (float)newVal4;
-        midiOutput.addEvent(juce::MidiMessage::controllerEvent(1, (int)(*parameterCC4), newVal4), 0);
+        midiOutput.addEvent(juce::MidiMessage::controllerEvent(1, (int)(*parameterCC4) % 120, newVal4), 0);
     }
     if (newVal5 != *parameterCurrentValue5) {
         *parameterCurrentValue5 = (float)newVal5;
-        midiOutput.addEvent(juce::MidiMessage::controllerEvent(1, (int)(*parameterCC5), newVal5), 0);
+        midiOutput.addEvent(juce::MidiMessage::controllerEvent(1, (int)(*parameterCC5) % 120, newVal5), 0);
     }
 
 

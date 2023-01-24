@@ -92,7 +92,7 @@ void SettingizerPluginEditor::setUpChannelBox(juce::ComboBox* box, juce::AudioPr
     std::unique_ptr<ComboBoxAttachment>& attachment)
 {
     addAndMakeVisible(box);
-    box->addItem("Omni", 0);
+    box->addItem("Omni", 128);
     box->addItem("1", 1);
     box->addItem("2", 2);
     box->addItem("3", 3);
@@ -118,7 +118,7 @@ void SettingizerPluginEditor::setUpCCBox(juce::ComboBox* box, juce::AudioProcess
     std::unique_ptr<ComboBoxAttachment>& attachment)
 {
     addAndMakeVisible(box);
-    box->addItem("0", 0);
+    box->addItem("0", 128);
     box->addItem("1", 1);
     box->addItem("2", 2);
     box->addItem("3", 3);
