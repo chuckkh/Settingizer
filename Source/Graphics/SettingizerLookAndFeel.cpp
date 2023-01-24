@@ -9,3 +9,8 @@
 */
 
 #include "SettingizerLookAndFeel.h"
+
+void SettingizerLookAndFeel::drawLinearSliderThumb (Graphics& g, int x, int y, int width, int height, float sliderPos, float minSliderPos, float maxSliderPos, const Slider::SliderStyle, Slider& slider)
+{
+    g.drawImage(hSliderKnob, slider.getLocalBounds().toFloat());
+}
