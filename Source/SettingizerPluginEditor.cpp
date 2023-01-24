@@ -30,22 +30,22 @@ SettingizerPluginEditor::SettingizerPluginEditor (SettingizerPluginProcessor& p,
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mainSliderAttach;
     */
     setUpCCBox(&ccSelector1, vts, "pCC1", ccSelectorAttach1);
-    setUpCCBox(&ccSelector1, vts, "pCC2", ccSelectorAttach2);
-/*    setUpCCBox(&ccSelector1, vts, "pCC3", ccSelectorAttach3);
-    setUpCCBox(&ccSelector1, vts, "pCC4", ccSelectorAttach4);
-    setUpCCBox(&ccSelector1, vts, "pCC5", ccSelectorAttach5);
+    setUpCCBox(&ccSelector2, vts, "pCC2", ccSelectorAttach2);
+    setUpCCBox(&ccSelector3, vts, "pCC3", ccSelectorAttach3);
+    setUpCCBox(&ccSelector4, vts, "pCC4", ccSelectorAttach4);
+    setUpCCBox(&ccSelector5, vts, "pCC5", ccSelectorAttach5);
     setUpVSlider(&leftSlider1, vts, "pLower1", leftSliderAttach1);
-    setUpVSlider(&leftSlider2, vts, "pLower1", leftSliderAttach2);
-    setUpVSlider(&leftSlider3, vts, "pLower1", leftSliderAttach3);
-    setUpVSlider(&leftSlider4, vts, "pLower1", leftSliderAttach4);
-    setUpVSlider(&leftSlider5, vts, "pLower1", leftSliderAttach5);
+    setUpVSlider(&leftSlider2, vts, "pLower2", leftSliderAttach2);
+    setUpVSlider(&leftSlider3, vts, "pLower3", leftSliderAttach3);
+    setUpVSlider(&leftSlider4, vts, "pLower4", leftSliderAttach4);
+    setUpVSlider(&leftSlider5, vts, "pLower5", leftSliderAttach5);
     setUpHSlider(&mainSlider, vts, "mainController", mainSliderAttach);
     setUpVSlider(&rightSlider1, vts, "pUpper1", rightSliderAttach1);
-    setUpVSlider(&rightSlider2, vts, "pUpper1", rightSliderAttach2);
-    setUpVSlider(&rightSlider3, vts, "pUpper1", rightSliderAttach3);
-    setUpVSlider(&rightSlider4, vts, "pUpper1", rightSliderAttach4);
-    setUpVSlider(&rightSlider5, vts, "pUpper1", rightSliderAttach5);*/
-    setSize (400, 300);
+    setUpVSlider(&rightSlider2, vts, "pUpper2", rightSliderAttach2);
+    setUpVSlider(&rightSlider3, vts, "pUpper3", rightSliderAttach3);
+    setUpVSlider(&rightSlider4, vts, "pUpper4", rightSliderAttach4);
+    setUpVSlider(&rightSlider5, vts, "pUpper5", rightSliderAttach5);
+    setSize (800, 300);
 }
 
 SettingizerPluginEditor::~SettingizerPluginEditor()
@@ -61,13 +61,27 @@ void SettingizerPluginEditor::paint (juce::Graphics& g)
 
     g.setColour (juce::Colours::white);
     g.setFont (15.0f);
-    g.drawFittedText ("Hello World!", getLocalBounds(), juce::Justification::centred, 1);
+    g.drawFittedText("Settingizer", 0, 0, 800, 40, juce::Justification::centredTop, 1);
 }
 
 void SettingizerPluginEditor::resized()
 {
-    ccSelector1.setBounds(10, 10, 60, 40);
-    ccSelector2.setBounds(10, 60, 60, 40);
+    ccSelector1.setBounds(10, 10, 60, 25);
+    ccSelector2.setBounds(10, 40, 60, 25);
+    ccSelector3.setBounds(10, 70, 60, 25);
+    ccSelector4.setBounds(10, 100, 60, 25);
+    ccSelector5.setBounds(10, 130, 60, 25);
+    leftSlider1.setBounds(100, 10, 25, 280);
+    leftSlider2.setBounds(130, 10, 25, 280);
+    leftSlider3.setBounds(160, 10, 25, 280);
+    leftSlider4.setBounds(190, 10, 25, 280);
+    leftSlider5.setBounds(220, 10, 25, 280);
+    mainSlider.setBounds(250, 250, 300, 50);
+    rightSlider1.setBounds(580, 10, 25, 280);
+    rightSlider2.setBounds(610, 10, 25, 280);
+    rightSlider3.setBounds(640, 10, 25, 280);
+    rightSlider4.setBounds(670, 10, 25, 280);
+    rightSlider5.setBounds(700, 10, 25, 280);
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
 }
