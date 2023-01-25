@@ -40,52 +40,185 @@ SettingizerPluginEditor::SettingizerPluginEditor (SettingizerPluginProcessor& p,
     setUpVSlider(&leftSlider3, vts, "pLower3", leftSliderAttach3);
     setUpVSlider(&leftSlider4, vts, "pLower4", leftSliderAttach4);
     setUpVSlider(&leftSlider5, vts, "pLower5", leftSliderAttach5);
+    setUpVSlider(&currentSlider1, vts, "pCurrent1", currentSliderAttach1);
+    setUpVSlider(&currentSlider2, vts, "pCurrent2", currentSliderAttach2);
+    setUpVSlider(&currentSlider3, vts, "pCurrent3", currentSliderAttach3);
+    setUpVSlider(&currentSlider4, vts, "pCurrent4", currentSliderAttach4);
+    setUpVSlider(&currentSlider5, vts, "pCurrent5", currentSliderAttach5);
+
     setUpHSlider(&mainSlider, vts, "mainController", mainSliderAttach);
     setUpVSlider(&rightSlider1, vts, "pUpper1", rightSliderAttach1);
     setUpVSlider(&rightSlider2, vts, "pUpper2", rightSliderAttach2);
     setUpVSlider(&rightSlider3, vts, "pUpper3", rightSliderAttach3);
     setUpVSlider(&rightSlider4, vts, "pUpper4", rightSliderAttach4);
     setUpVSlider(&rightSlider5, vts, "pUpper5", rightSliderAttach5);
-    setSize (800, 300);
+    addAndMakeVisible(ccLabelMain);
+//    ccLabelMain.setColour
+    ccLabelMain.setText("Main CC", juce::NotificationType::dontSendNotification);
+
+    ccLabel1.setText("CC 1", juce::NotificationType::dontSendNotification);
+    ccLabel2.setText("CC 2", juce::NotificationType::dontSendNotification);
+    ccLabel3.setText("CC 3", juce::NotificationType::dontSendNotification);
+    ccLabel4.setText("CC 4", juce::NotificationType::dontSendNotification);
+    ccLabel5.setText("CC 5", juce::NotificationType::dontSendNotification);
+    addAndMakeVisible(ccLabel1);
+    addAndMakeVisible(ccLabel2);
+    addAndMakeVisible(ccLabel3);
+    addAndMakeVisible(ccLabel4);
+    addAndMakeVisible(ccLabel5);
+    addAndMakeVisible(leftLabel1);
+    addAndMakeVisible(leftLabel2);
+    addAndMakeVisible(leftLabel3);
+    addAndMakeVisible(leftLabel4);
+    addAndMakeVisible(leftLabel5);
+    leftLabel1.setText("L1", juce::NotificationType::dontSendNotification);
+    leftLabel2.setText("L2", juce::NotificationType::dontSendNotification);
+    leftLabel3.setText("L3", juce::NotificationType::dontSendNotification);
+    leftLabel4.setText("L4", juce::NotificationType::dontSendNotification);
+    leftLabel5.setText("L5", juce::NotificationType::dontSendNotification);
+
+
+    addAndMakeVisible(currentLabel1);
+    addAndMakeVisible(currentLabel2);
+    addAndMakeVisible(currentLabel3);
+    addAndMakeVisible(currentLabel4);
+    addAndMakeVisible(currentLabel5);
+    currentLabel1.setText("1", juce::NotificationType::dontSendNotification);
+    currentLabel2.setText("2", juce::NotificationType::dontSendNotification);
+    currentLabel3.setText("3", juce::NotificationType::dontSendNotification);
+    currentLabel4.setText("4", juce::NotificationType::dontSendNotification);
+    currentLabel5.setText("5", juce::NotificationType::dontSendNotification);
+
+    addAndMakeVisible(rightLabel1);
+    addAndMakeVisible(rightLabel2);
+    addAndMakeVisible(rightLabel3);
+    addAndMakeVisible(rightLabel4);
+    addAndMakeVisible(rightLabel5);
+    rightLabel1.setText("R1", juce::NotificationType::dontSendNotification);
+    rightLabel2.setText("R2", juce::NotificationType::dontSendNotification);
+    rightLabel3.setText("R3", juce::NotificationType::dontSendNotification);
+    rightLabel4.setText("R4", juce::NotificationType::dontSendNotification);
+    rightLabel5.setText("R5", juce::NotificationType::dontSendNotification);
+
+
+
+    /*
+    currentSlider1.getValueObject().referTo(valueTreeState.getParameterAsValue("pCurrent1"));
+    currentSlider2.getValueObject().referTo(valueTreeState.getParameterAsValue("pCurrent2"));
+    currentSlider3.getValueObject().referTo(valueTreeState.getParameterAsValue("pCurrent3"));
+    currentSlider4.getValueObject().referTo(valueTreeState.getParameterAsValue("pCurrent4"));
+    currentSlider5.getValueObject().referTo(valueTreeState.getParameterAsValue("pCurrent5"));
+    /**/
+    startTimerHz(30);
+
+
+    setSize (800, 350);
 }
+
+void SettingizerPluginEditor::timerCallback()
+{
+    currentSlider1.setValue(*valueTreeState.getRawParameterValue("pCurrent1"));
+    currentSlider2.setValue(*valueTreeState.getRawParameterValue("pCurrent2"));
+    currentSlider3.setValue(*valueTreeState.getRawParameterValue("pCurrent3"));
+    currentSlider4.setValue(*valueTreeState.getRawParameterValue("pCurrent4"));
+    currentSlider5.setValue(*valueTreeState.getRawParameterValue("pCurrent5"));
+}
+
+
 
 SettingizerPluginEditor::~SettingizerPluginEditor()
 {
     setLookAndFeel(nullptr);
+    stopTimer();
 }
 
 //==============================================================================
 void SettingizerPluginEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-
-    g.setColour (juce::Colours::white);
-    g.setFont (15.0f);
+//    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
+    g.drawImageAt(lnf.backgroundImg, 0, 0, false);
+    g.setColour (juce::Colours::mintcream);
+    g.setFont (30.0f);
     g.drawFittedText("Settingizer", 0, 0, 800, 40, juce::Justification::centredTop, 1);
 }
 
 void SettingizerPluginEditor::resized()
 {
-    ccSelectorMain.setBounds(5, 10, 60, 30);
-    ccSelector1.setBounds(10, 50, 60, 25);
-    ccSelector2.setBounds(10, 80, 60, 25);
-    ccSelector3.setBounds(10, 110, 60, 25);
-    ccSelector4.setBounds(10, 140, 60, 25);
-    ccSelector5.setBounds(10, 170, 60, 25);
+    ccLabelMain.setBounds(5, 8, 60, 10);
+    ccLabel1.setBounds(10, 53, 60, 25);
+    ccLabel2.setBounds(10, 103, 60, 25);
+    ccLabel3.setBounds(10, 153, 60, 25);
+    ccLabel4.setBounds(10, 203, 60, 25);
+    ccLabel5.setBounds(10, 253, 60, 25);
+
+    ccSelectorMain.setBounds(5, 20, 60, 30);
+
+    ccSelector1.setBounds(10, 75, 60, 25);
+    ccSelector2.setBounds(10, 125, 60, 25);
+    ccSelector3.setBounds(10, 175, 60, 25);
+    ccSelector4.setBounds(10, 225, 60, 25);
+    ccSelector5.setBounds(10, 275, 60, 25);
     leftSlider1.setBounds(100, 10, 25, 280);
     leftSlider2.setBounds(130, 10, 25, 280);
     leftSlider3.setBounds(160, 10, 25, 280);
     leftSlider4.setBounds(190, 10, 25, 280);
     leftSlider5.setBounds(220, 10, 25, 280);
-    mainSlider.setBounds(250, 250, 300, 50);
+    leftLabel1.setBounds(100, 300, 25, 50);
+    leftLabel2.setBounds(130, 300, 25, 50);
+    leftLabel3.setBounds(160, 300, 25, 50);
+    leftLabel4.setBounds(190, 300, 25, 50);
+    leftLabel5.setBounds(220, 300, 25, 50);
+    currentSlider1.setBounds(325, 50, 18, 200);
+    currentSlider2.setBounds(358, 50, 18, 200);
+    currentSlider3.setBounds(391, 50, 18, 200);
+    currentSlider4.setBounds(424, 50, 18, 200);
+    currentSlider5.setBounds(457, 50, 18, 200);
+    currentLabel1.setBounds(325, 260, 18, 50);
+    currentLabel2.setBounds(358, 260, 18, 50);
+    currentLabel3.setBounds(391, 260, 18, 50);
+    currentLabel4.setBounds(424, 260, 18, 50);
+    currentLabel5.setBounds(457, 260, 18, 50);
+    mainSlider.setBounds(250, 300, 300, 50);
     rightSlider1.setBounds(580, 10, 25, 280);
     rightSlider2.setBounds(610, 10, 25, 280);
     rightSlider3.setBounds(640, 10, 25, 280);
     rightSlider4.setBounds(670, 10, 25, 280);
     rightSlider5.setBounds(700, 10, 25, 280);
+    rightLabel1.setBounds(580, 300, 25, 50);
+    rightLabel2.setBounds(610, 300, 25, 50);
+    rightLabel3.setBounds(640, 300, 25, 50);
+    rightLabel4.setBounds(670, 300, 25, 50);
+    rightLabel5.setBounds(700, 300, 25, 50);
+
+
+
+
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
+}
+
+void SettingizerPluginEditor::setUpVSlider(juce::Slider* slider, juce::AudioProcessorValueTreeState& vts, juce::String paramId,
+    std::unique_ptr<SliderAttachment>& attachment)
+{
+    addAndMakeVisible(slider);
+//    slider->setBounds(slider->getBounds().expanded(20, 0));
+    slider->setTextBoxStyle(juce::Slider::TextBoxBelow, true, 0, 0);
+    slider->setPopupDisplayEnabled(true, true, this);
+    slider->setSliderStyle(juce::Slider::LinearVertical);
+    attachment.reset(new SliderAttachment(vts, paramId, *slider));
+    slider->addListener(this);
+}
+
+void SettingizerPluginEditor::setUpHSlider(juce::Slider* slider, juce::AudioProcessorValueTreeState& vts, juce::String paramId,
+    std::unique_ptr<SliderAttachment>& attachment)
+{
+    addAndMakeVisible(slider);
+//    slider->setBounds(slider->getBounds().expanded(20, 0));
+    slider->setTextBoxStyle(juce::Slider::TextBoxBelow, true, 0, 0);
+    slider->setSliderStyle(juce::Slider::LinearHorizontal);
+    attachment.reset(new SliderAttachment(vts, paramId, *slider));
+    slider->addListener(this);
 }
 
 void SettingizerPluginEditor::setUpChannelBox(juce::ComboBox* box, juce::AudioProcessorValueTreeState& vts, juce::String paramId,
@@ -241,26 +374,6 @@ void SettingizerPluginEditor::setUpCCBox(juce::ComboBox* box, juce::AudioProcess
     //    box->setColour(juce::ComboBox::ColourIds::backgroundColourId, juce::Colours::black);
     attachment.reset(new ComboBoxAttachment(vts, paramId, *box));
     box->addListener(this);
-}
-
-void SettingizerPluginEditor::setUpVSlider(juce::Slider* slider, juce::AudioProcessorValueTreeState& vts, juce::String paramId,
-    std::unique_ptr<SliderAttachment>& attachment)
-{
-    addAndMakeVisible(slider);
-    slider->setTextBoxStyle(juce::Slider::TextBoxBelow, true, 0, 0);
-    slider->setSliderStyle(juce::Slider::LinearVertical);
-    attachment.reset(new SliderAttachment(vts, paramId, *slider));
-    slider->addListener(this);
-}
-
-void SettingizerPluginEditor::setUpHSlider(juce::Slider* slider, juce::AudioProcessorValueTreeState& vts, juce::String paramId,
-    std::unique_ptr<SliderAttachment>& attachment)
-{
-    addAndMakeVisible(slider);
-    slider->setTextBoxStyle(juce::Slider::TextBoxBelow, true, 0, 0);
-    slider->setSliderStyle(juce::Slider::LinearHorizontal);
-    attachment.reset(new SliderAttachment(vts, paramId, *slider));
-    slider->addListener(this);
 }
 
 

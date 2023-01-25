@@ -213,6 +213,7 @@ void SettingizerPluginProcessor::processMidi(juce::AudioBuffer<any>& buffer, juc
     if (current != *mainCurrentValue) {
         *mainCurrentValue = (float)current;
         midiOutput.addEvent(juce::MidiMessage::controllerEvent(1, (int)(*mainCC) % 120, current), 0);
+        
     }
     if (newVal1 != *parameterCurrentValue1) {
         *parameterCurrentValue1 = (float)newVal1;

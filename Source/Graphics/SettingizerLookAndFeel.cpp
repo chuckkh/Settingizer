@@ -89,11 +89,13 @@ void SettingizerLookAndFeel::drawLinearSlider(juce::Graphics& g, int x, int y, i
             g.setColour(slider.findColour(juce::Slider::backgroundColourId));
             if (slider.isHorizontal())
             {
+                //slider.setBounds(slider.getBounds().expanded(20, 0));
                 g.drawImageAt(hSliderKnob, sliderPos - 19, y + height / 2 - 12, false);
             }
             else
             {
-                g.drawImageAt(hSliderKnob, x + width / 2 - 19, sliderPos - 12, false);
+                //slider.setBounds(slider.getBounds().expanded(0, 20));
+                g.drawImageAt(vSliderKnob, x + width / 2 - 12, sliderPos - 19, false);
             }
             g.setColour(slider.findColour(juce::Slider::trackColourId));
             //g.setColour(slider.findColour(juce::Slider::thumbColourId));
