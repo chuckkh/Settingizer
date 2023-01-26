@@ -205,7 +205,8 @@ void SettingizerPluginEditor::setUpVSlider(juce::Slider* slider, juce::AudioProc
 //    slider->setBounds(slider->getBounds().expanded(20, 0));
     slider->setTextBoxStyle(juce::Slider::TextBoxBelow, true, 0, 0);
     slider->setPopupDisplayEnabled(true, true, this);
-    slider->setSliderStyle(juce::Slider::LinearVertical);
+    //slider->setSliderStyle(juce::Slider::LinearVertical);
+    slider->setSliderStyle(juce::Slider::ThreeValueVertical);
     attachment.reset(new SliderAttachment(vts, paramId, *slider));
     slider->addListener(this);
 }

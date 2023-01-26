@@ -22,6 +22,14 @@ void SettingizerLookAndFeel::drawLinearSliderThumb (juce::Graphics& g, int x, in
 }
 /* */
 
+int SettingizerLookAndFeel::getSliderThumbRadius(juce::Slider& slider)
+{
+    return slider.isHorizontal() ? 21 : juce::jmin(12, static_cast<int> ((float)slider.getWidth() * 0.5f));
+//    return juce::jmin(12, slider.isHorizontal() ? static_cast<int> ((float)slider.getHeight() * 0.5f)
+//        : static_cast<int> ((float)slider.getWidth() * 0.5f));
+}
+
+
 void SettingizerLookAndFeel::drawLinearSlider(juce::Graphics& g, int x, int y, int width, int height,
     float sliderPos,
     float minSliderPos,
@@ -95,11 +103,11 @@ void SettingizerLookAndFeel::drawLinearSlider(juce::Graphics& g, int x, int y, i
             else
             {
                 //slider.setBounds(slider.getBounds().expanded(0, 20));
-                g.drawImageAt(vSliderKnob, x + width / 2 - 12, sliderPos - 19, false);
+                //g.drawImageAt(vSliderKnob, x + width / 2 - 12, sliderPos - 19, false);
+                //g.setColour(slider.findColour(juce::Slider::trackColourId));
+                g.setColour(slider.findColour(juce::Slider::thumbColourId));
+                g.fillEllipse(juce::Rectangle<float>(static_cast<float> (thumbWidth), static_cast<float> (thumbWidth)).withCentre(isThreeVal ? thumbPoint : maxPoint));
             }
-            g.setColour(slider.findColour(juce::Slider::trackColourId));
-            //g.setColour(slider.findColour(juce::Slider::thumbColourId));
-            //g.fillEllipse(juce::Rectangle<float>(static_cast<float> (thumbWidth), static_cast<float> (thumbWidth)).withCentre(isThreeVal ? thumbPoint : maxPoint));
         }
 
         if (isTwoVal || isThreeVal)
