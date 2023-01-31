@@ -6,6 +6,14 @@
   <MAINGROUP id="ksP35K" name="Settingizer">
     <GROUP id="{13E29CE5-13D8-1362-51FA-0D63F903C26D}" name="Source">
       <GROUP id="{A6146090-09A6-AC45-B6DC-54240A37C1D0}" name="Graphics">
+        <FILE id="ZJtyh1" name="SettingizerLeftSliderLookAndFeel.cpp" compile="1"
+              resource="0" file="Source/Graphics/SettingizerLeftSliderLookAndFeel.cpp"/>
+        <FILE id="aUfM2g" name="SettingizerLeftSliderLookAndFeel.h" compile="0"
+              resource="0" file="Source/Graphics/SettingizerLeftSliderLookAndFeel.h"/>
+        <FILE id="jyoRSw" name="SettingizerRightSliderLookAndFeel.cpp" compile="1"
+              resource="0" file="Source/Graphics/SettingizerRightSliderLookAndFeel.cpp"/>
+        <FILE id="efmhJn" name="SettingizerRightSliderLookAndFeel.h" compile="0"
+              resource="0" file="Source/Graphics/SettingizerRightSliderLookAndFeel.h"/>
         <FILE id="P20n0j" name="SettingizerLookAndFeel.cpp" compile="1" resource="0"
               file="Source/Graphics/SettingizerLookAndFeel.cpp"/>
         <FILE id="EKQhNy" name="SettingizerLookAndFeel.h" compile="0" resource="0"

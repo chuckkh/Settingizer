@@ -35,16 +35,18 @@ SettingizerPluginEditor::SettingizerPluginEditor (SettingizerPluginProcessor& p,
     setUpCCBox(&ccSelector3, vts, "pCC3", ccSelectorAttach3);
     setUpCCBox(&ccSelector4, vts, "pCC4", ccSelectorAttach4);
     setUpCCBox(&ccSelector5, vts, "pCC5", ccSelectorAttach5);
-    setUpVSlider(&leftSlider1, vts, "pLower1", leftSliderAttach1);
-    setUpVSlider(&leftSlider2, vts, "pLower2", leftSliderAttach2);
-    setUpVSlider(&leftSlider3, vts, "pLower3", leftSliderAttach3);
-    setUpVSlider(&leftSlider4, vts, "pLower4", leftSliderAttach4);
-    setUpVSlider(&leftSlider5, vts, "pLower5", leftSliderAttach5);
+
     setUpVSlider(&currentSlider1, vts, "pCurrent1", currentSliderAttach1);
     setUpVSlider(&currentSlider2, vts, "pCurrent2", currentSliderAttach2);
     setUpVSlider(&currentSlider3, vts, "pCurrent3", currentSliderAttach3);
     setUpVSlider(&currentSlider4, vts, "pCurrent4", currentSliderAttach4);
     setUpVSlider(&currentSlider5, vts, "pCurrent5", currentSliderAttach5);
+
+    setUpVSlider(&leftSlider1, vts, "pLower1", leftSliderAttach1);
+    setUpVSlider(&leftSlider2, vts, "pLower2", leftSliderAttach2);
+    setUpVSlider(&leftSlider3, vts, "pLower3", leftSliderAttach3);
+    setUpVSlider(&leftSlider4, vts, "pLower4", leftSliderAttach4);
+    setUpVSlider(&leftSlider5, vts, "pLower5", leftSliderAttach5);
 
     setUpHSlider(&mainSlider, vts, "mainController", mainSliderAttach);
     setUpVSlider(&rightSlider1, vts, "pUpper1", rightSliderAttach1);
@@ -159,7 +161,10 @@ void SettingizerPluginEditor::resized()
     ccSelector3.setBounds(10, 175, 60, 25);
     ccSelector4.setBounds(10, 225, 60, 25);
     ccSelector5.setBounds(10, 275, 60, 25);
-    leftSlider1.setBounds(100, 10, 25, 280);
+    leftSlider1.setBounds(80, 10, 25, 280);
+
+    leftSlider1.setLookAndFeel(&llnf);
+
     leftSlider2.setBounds(130, 10, 25, 280);
     leftSlider3.setBounds(160, 10, 25, 280);
     leftSlider4.setBounds(190, 10, 25, 280);
@@ -169,7 +174,8 @@ void SettingizerPluginEditor::resized()
     leftLabel3.setBounds(160, 300, 25, 50);
     leftLabel4.setBounds(190, 300, 25, 50);
     leftLabel5.setBounds(220, 300, 25, 50);
-    currentSlider1.setBounds(325, 50, 18, 200);
+    currentSlider1.setBounds(100, 10, 12, 280);
+//    currentSlider1.setBounds(325, 50, 18, 200);
     currentSlider2.setBounds(358, 50, 18, 200);
     currentSlider3.setBounds(391, 50, 18, 200);
     currentSlider4.setBounds(424, 50, 18, 200);
@@ -180,7 +186,11 @@ void SettingizerPluginEditor::resized()
     currentLabel4.setBounds(424, 260, 18, 50);
     currentLabel5.setBounds(457, 260, 18, 50);
     mainSlider.setBounds(250, 300, 300, 50);
-    rightSlider1.setBounds(580, 10, 25, 280);
+
+    rightSlider1.setLookAndFeel(&rlnf);
+
+    rightSlider1.setBounds(145, 10, 25, 280);
+//    rightSlider1.setBounds(580, 10, 25, 280);
     rightSlider2.setBounds(610, 10, 25, 280);
     rightSlider3.setBounds(640, 10, 25, 280);
     rightSlider4.setBounds(670, 10, 25, 280);
@@ -206,7 +216,7 @@ void SettingizerPluginEditor::setUpVSlider(juce::Slider* slider, juce::AudioProc
     slider->setTextBoxStyle(juce::Slider::TextBoxBelow, true, 0, 0);
     slider->setPopupDisplayEnabled(true, true, this);
     //slider->setSliderStyle(juce::Slider::LinearVertical);
-    slider->setSliderStyle(juce::Slider::ThreeValueVertical);
+    slider->setSliderStyle(juce::Slider::LinearVertical);
     attachment.reset(new SliderAttachment(vts, paramId, *slider));
     slider->addListener(this);
 }

@@ -11,7 +11,9 @@
 #include <JuceHeader.h>
 #include "SettingizerPluginProcessor.h"
 #include "Graphics/SettingizerLookAndFeel.h"
-#include "Components/SettingizerThreeValueSlider.h"
+#include "Graphics/SettingizerLeftSliderLookAndFeel.h"
+#include "Graphics/SettingizerRightSliderLookAndFeel.h"
+//#include "Components/SettingizerThreeValueSlider.h"
  
 //==============================================================================
 /**
@@ -49,6 +51,8 @@ private:
     // access the processor object that created it.
     SettingizerPluginProcessor& audioProcessor;
     SettingizerLookAndFeel lnf;
+    SettingizerLeftSliderLookAndFeel llnf;
+    SettingizerRightSliderLookAndFeel rlnf;
     juce::AudioProcessorValueTreeState& valueTreeState;
 
     void buttonClicked(juce::Button*) override;
@@ -59,7 +63,7 @@ private:
     juce::ComboBox ccSelector1, ccSelector2, ccSelector3, ccSelector4, ccSelector5, ccSelectorMain;
     juce::Label ccLabel1, ccLabel2, ccLabel3, ccLabel4, ccLabel5, ccLabelMain;
     //juce::Slider leftSlider1, leftSlider2, leftSlider3, leftSlider4, leftSlider5;
-    SettingizerThreeValueSlider leftSlider1, leftSlider2, leftSlider3, leftSlider4, leftSlider5;
+    juce::Slider leftSlider1, leftSlider2, leftSlider3, leftSlider4, leftSlider5;
     juce::Label leftLabel1, leftLabel2, leftLabel3, leftLabel4, leftLabel5;
     juce::Slider rightSlider1, rightSlider2, rightSlider3, rightSlider4, rightSlider5;
     juce::Label rightLabel1, rightLabel2, rightLabel3, rightLabel4, rightLabel5;

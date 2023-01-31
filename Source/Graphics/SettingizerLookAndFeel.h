@@ -22,5 +22,4 @@ public:
 //    void drawLinearSliderThumb (juce::Graphics &, int, int, int, int, float, float, float, const juce::Slider::SliderStyle, juce::Slider &) override;
     void drawLinearSlider(juce::Graphics&, int, int, int, int, float, float, float, const juce::Slider::SliderStyle, juce::Slider&) override;
     int getSliderThumbRadius(juce::Slider&) override;
-
 };
