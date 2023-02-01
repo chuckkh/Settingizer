@@ -10,136 +10,59 @@
 
 #include "SettingizerThreeValueSlider.h"
 
-SettingizerThreeValueSlider::SettingizerThreeValueSlider() :
-    juce::Slider()
+
+SettingizerThreeValueSlider::SettingizerThreeValueSlider(SettingizerPluginProcessor& p, juce::AudioProcessorValueTreeState& vts, const juce::String pIdLeft, const juce::String pIdRight, const juce::String pIdCurrent) : audioProcessor(p), valueTreeState(vts), paramIdLeft(pIdLeft), paramIdRight(pIdRight), paramIdCurrent(pIdCurrent)
+    
 {
+
+    leftSlider.setLookAndFeel(&leftLNF);
+    rightSlider.setLookAndFeel(&rightLNF);
+    setUpVSlider(&leftSlider, valueTreeState, paramIdLeft, leftSliderAttach1);
+    setUpVSlider(&rightSlider, valueTreeState, paramIdRight, rightSliderAttach1);
+    setUpVSlider(&currentSlider, valueTreeState, paramIdCurrent, currentSliderAttach1);
+
 }
 
-void SettingizerThreeValueSlider::setValue(double newValue, juce::NotificationType notification)
+SettingizerThreeValueSlider::~SettingizerThreeValueSlider()
 {
-    // for a two-value style slider, you should use the setMinValue() and setMaxValue()
-    // methods to set the two values.
-    //juce::jassert(style != TwoValueHorizontal && style != TwoValueVertical);
-
-    //newValue = constrainedValue(newValue);
-
-    if (style == juce::ThreeValueHorizontal || style == juce::ThreeValueVertical)
-    {
-        juce::jassert(static_cast<double> (valueMin.getValue()) <= static_cast<double> (valueMax.getValue()));
-
-        newValue = juce::jlimit(static_cast<double> (juce::valueMin.getValue()),
-            static_cast<double> (juce::valueMax.getValue()),
-            newValue);
-    }
-
-    if (newValue != lastCurrentValue)
-    {
-        if (valueBox != nullptr)
-            valueBox->hideEditor(true);
-
-        lastCurrentValue = newValue;
-
-        // Need to do this comparison because the Value will use equalsWithSameType to compare
-        // the new and old values, so will generate unwanted change events if the type changes.
-        // Cast to double before comparing, to prevent comparing as another type (e.g. String).
-        if (static_cast<double> (currentValue.getValue()) != newValue)
-            currentValue = newValue;
-
-        updateText();
-        owner.repaint();
-
-        triggerChangeMessage(notification);
-    }
+    leftSlider.setLookAndFeel(nullptr);
+    rightSlider.setLookAndFeel(nullptr);
 }
 
-void SettingizerThreeValueSlider::setMinValue(double newValue, juce::NotificationType notification, bool allowNudgingOfOtherValues)
+void SettingizerThreeValueSlider::setUpVSlider(juce::Slider* slider, juce::AudioProcessorValueTreeState& vts, juce::String paramId,
+    std::unique_ptr<SliderAttachment>& attachment)
 {
-    // The minimum value only applies to sliders that are in two- or three-value mode.
-    jassert(style == TwoValueHorizontal || style == TwoValueVertical
-        || style == ThreeValueHorizontal || style == ThreeValueVertical);
-
-    newValue = constrainedValue(newValue);
-
-    if (style == TwoValueHorizontal || style == TwoValueVertical)
-    {
-        if (allowNudgingOfOtherValues && newValue > static_cast<double> (valueMax.getValue()))
-            setMaxValue(newValue, notification, false);
-
-        newValue = jmin(static_cast<double> (valueMax.getValue()), newValue);
-    }
-    else
-    {
-        if (allowNudgingOfOtherValues && newValue > lastCurrentValue)
-            setValue(newValue, notification);
-
-        newValue = jmin(lastCurrentValue, newValue);
-    }
-
-    if (lastValueMin != newValue)
-    {
-        lastValueMin = newValue;
-        valueMin = newValue;
-        owner.repaint();
-        updatePopupDisplay();
-
-        triggerChangeMessage(notification);
-    }
+    addAndMakeVisible(slider);
+    //    slider->setBounds(slider->getBounds().expanded(20, 0));
+    slider->setTextBoxStyle(juce::Slider::TextBoxBelow, true, 0, 0);
+    slider->setPopupDisplayEnabled(true, true, this);
+    //slider->setSliderStyle(juce::Slider::LinearVertical);
+    slider->setSliderStyle(juce::Slider::LinearVertical);
+    attachment.reset(new SliderAttachment(vts, paramId, *slider));
+    slider->addListener(this);
 }
 
-void SettingizerThreeValueSlider::setMaxValue(double newValue, juce::NotificationType notification, bool allowNudgingOfOtherValues)
+void SettingizerThreeValueSlider::paint(juce::Graphics& g)
 {
-    // The maximum value only applies to sliders that are in two- or three-value mode.
-    jassert(style == TwoValueHorizontal || style == TwoValueVertical
-        || style == ThreeValueHorizontal || style == ThreeValueVertical);
 
-    newValue = constrainedValue(newValue);
-
-    if (style == TwoValueHorizontal || style == TwoValueVertical)
-    {
-        if (allowNudgingOfOtherValues && newValue < static_cast<double> (valueMin.getValue()))
-            setMinValue(newValue, notification, false);
-
-        newValue = jmax(static_cast<double> (valueMin.getValue()), newValue);
-    }
-    else
-    {
-        if (allowNudgingOfOtherValues && newValue < lastCurrentValue)
-            setValue(newValue, notification);
-
-        newValue = jmax(lastCurrentValue, newValue);
-    }
-
-    if (lastValueMax != newValue)
-    {
-        lastValueMax = newValue;
-        valueMax = newValue;
-        owner.repaint();
-        updatePopupDisplay();
-
-        triggerChangeMessage(notification);
-    }
 }
 
-void SettingizerThreeValueSlider::setMinAndMaxValues(double newMinValue, double newMaxValue, juce::NotificationType notification)
+void SettingizerThreeValueSlider::resized()
 {
-    // The maximum value only applies to sliders that are in two- or three-value mode.
-    jassert(style == TwoValueHorizontal || style == TwoValueVertical
-        || style == ThreeValueHorizontal || style == ThreeValueVertical);
+    auto w = getWidth();
+    auto w3 = w / 3;
+    auto h = getHeight();
+    leftSlider.setBounds(0, 0, w3, h);
+    currentSlider.setBounds(w3, 0, w3, h);
+    rightSlider.setBounds(w - w3, 0, w3, h);
+}
 
-    if (newMaxValue < newMinValue)
-        std::swap(newMaxValue, newMinValue);
+void SettingizerThreeValueSlider::sliderValueChanged(juce::Slider* slider)
+{
 
-    newMinValue = constrainedValue(newMinValue);
-    newMaxValue = constrainedValue(newMaxValue);
+}
 
-    if (lastValueMax != newMaxValue || lastValueMin != newMinValue)
-    {
-        lastValueMax = newMaxValue;
-        lastValueMin = newMinValue;
-        valueMin = newMinValue;
-        valueMax = newMaxValue;
-        owner.repaint();
-
-        triggerChangeMessage(notification);
-    }
+void SettingizerThreeValueSlider::sliderUpdate(double newValue)
+{
+    currentSlider.setValue(newValue);
 }

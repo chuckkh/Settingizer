@@ -13,7 +13,7 @@
 #include "Graphics/SettingizerLookAndFeel.h"
 #include "Graphics/SettingizerLeftSliderLookAndFeel.h"
 #include "Graphics/SettingizerRightSliderLookAndFeel.h"
-//#include "Components/SettingizerThreeValueSlider.h"
+#include "Components/SettingizerThreeValueSlider.h"
  
 //==============================================================================
 /**
@@ -73,12 +73,13 @@ private:
 
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> channelSelectorAttach1, channelSelectorAttach2, channelSelectorAttach3, channelSelectorAttach4, channelSelectorAttach5, channelSelectorAttachMain;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> ccSelectorAttach1, ccSelectorAttach2, ccSelectorAttach3, ccSelectorAttach4, ccSelectorAttach5, ccSelectorAttachMain;
+    /**
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> leftSliderAttach1, leftSliderAttach2, leftSliderAttach3, leftSliderAttach4, leftSliderAttach5;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> rightSliderAttach1, rightSliderAttach2, rightSliderAttach3, rightSliderAttach4, rightSliderAttach5;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> currentSliderAttach1, currentSliderAttach2, currentSliderAttach3, currentSliderAttach4, currentSliderAttach5;
-
+    /**/
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> mainSliderAttach;
-
+    SettingizerThreeValueSlider valueSlider1, valueSlider2, valueSlider3, valueSlider4, valueSlider5;
 
 
 

@@ -5,6 +5,12 @@
               pluginFormats="buildAAX,buildAU,buildLV2,buildVST3" pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn">
   <MAINGROUP id="ksP35K" name="Settingizer">
     <GROUP id="{13E29CE5-13D8-1362-51FA-0D63F903C26D}" name="Source">
+      <GROUP id="{5ECF5703-C09D-2061-74AE-0BF6A935E352}" name="Components">
+        <FILE id="r0DAgo" name="SettingizerThreeValueSlider.cpp" compile="1"
+              resource="0" file="Source/Components/SettingizerThreeValueSlider.cpp"/>
+        <FILE id="kkeojn" name="SettingizerThreeValueSlider.h" compile="0"
+              resource="0" file="Source/Components/SettingizerThreeValueSlider.h"/>
+      </GROUP>
       <GROUP id="{A6146090-09A6-AC45-B6DC-54240A37C1D0}" name="Graphics">
         <FILE id="ZJtyh1" name="SettingizerLeftSliderLookAndFeel.cpp" compile="1"
               resource="0" file="Source/Graphics/SettingizerLeftSliderLookAndFeel.cpp"/>

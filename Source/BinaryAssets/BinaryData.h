@@ -10,9 +10,6 @@ namespace BinaryData
     extern const char*  background002_png;
     const int           background002_pngSize = 151659;
 
-    extern const char*  background002_xcf;
-    const int           background002_xcfSize = 652776;
-
     extern const char*  knobHb001_png;
     const int           knobHb001_pngSize = 8661;
 

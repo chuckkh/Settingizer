@@ -10,6 +10,11 @@
 
 #include "SettingizerLeftSliderLookAndFeel.h"
 
+SettingizerLeftSliderLookAndFeel::SettingizerLeftSliderLookAndFeel()
+{
+
+}
+
 void SettingizerLeftSliderLookAndFeel::drawLinearSlider(juce::Graphics& g, int x, int y, int width, int height,
     float sliderPos,
     float minSliderPos,
@@ -26,7 +31,7 @@ void SettingizerLeftSliderLookAndFeel::drawLinearSlider(juce::Graphics& g, int x
     else
     {
 
-        auto trackWidth = juce::jmin(6.0f, slider.isHorizontal() ? (float)height * 0.25f : (float)width * 0.25f);
+        auto trackWidth = juce::jmin(6.0f, slider.isHorizontal() ? (float)height * 0.5f : (float)width * 0.5f);
 
         juce::Point<float> startPoint(slider.isHorizontal() ? (float)x : (float)x + (float)width * 0.5f,
             slider.isHorizontal() ? (float)y + (float)height * 0.5f : (float)(height + y));
@@ -62,7 +67,7 @@ void SettingizerLeftSliderLookAndFeel::drawLinearSlider(juce::Graphics& g, int x
 
         if (1)
         {
-            auto sr = juce::jmin(trackWidth, (slider.isHorizontal() ? (float)height : (float)width) * 0.4f);
+            auto sr = juce::jmin(trackWidth, (slider.isHorizontal() ? (float)height : (float)width));
             auto pointerColour = slider.findColour(juce::Slider::thumbColourId);
 
             if (slider.isHorizontal())
@@ -80,8 +85,11 @@ void SettingizerLeftSliderLookAndFeel::drawLinearSlider(juce::Graphics& g, int x
             else
             {
                 /**/
+//                drawPointer(g, juce::jmax(0.0f, (float)x + (float)width * 0.5f - trackWidth * 2.0f),
+//                    minSliderPos - trackWidth,
+//                    trackWidth * 2.0f, pointerColour, 1);
                 drawPointer(g, juce::jmax(0.0f, (float)x + (float)width * 0.5f - trackWidth * 2.0f),
-                    minSliderPos - trackWidth,
+                    sliderPos - (float)thumbWidth * 0.5f,
                     trackWidth * 2.0f, pointerColour, 1);
                 /*
                 drawPointer(g, juce::jmin((float)(x + width) - trackWidth * 2.0f, (float)x + (float)width * 0.5f), maxSliderPos - sr,

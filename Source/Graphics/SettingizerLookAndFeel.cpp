@@ -21,6 +21,10 @@ void SettingizerLookAndFeel::drawLinearSliderThumb (juce::Graphics& g, int x, in
     }
 }
 /* */
+SettingizerLookAndFeel::SettingizerLookAndFeel()
+{
+
+}
 
 int SettingizerLookAndFeel::getSliderThumbRadius(juce::Slider& slider)
 {
@@ -50,10 +54,10 @@ void SettingizerLookAndFeel::drawLinearSlider(juce::Graphics& g, int x, int y, i
         auto trackWidth = juce::jmin(6.0f, slider.isHorizontal() ? (float)height * 0.5f : (float)width * 0.5f);
 
         juce::Point<float> startPoint(slider.isHorizontal() ? (float)x : (float)x + (float)width * 0.5f,
-            slider.isHorizontal() ? (float)y + (float)height * 0.5f : (float)(height + y));
+            slider.isHorizontal() ? (float)y + (float)height * 0.5f : (float)y);
 
         juce::Point<float> endPoint(slider.isHorizontal() ? (float)(width + x) : startPoint.x,
-            slider.isHorizontal() ? startPoint.y : (float)y);
+            slider.isHorizontal() ? startPoint.y : (float)(height + y));
 
         juce::Path backgroundTrack;
         backgroundTrack.startNewSubPath(startPoint);

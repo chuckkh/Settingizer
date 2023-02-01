@@ -11,7 +11,12 @@
 
 //==============================================================================
 SettingizerPluginEditor::SettingizerPluginEditor (SettingizerPluginProcessor& p, juce::AudioProcessorValueTreeState& vts)
-    : AudioProcessorEditor (&p), audioProcessor (p), valueTreeState (vts)
+    : AudioProcessorEditor (&p), audioProcessor (p), valueTreeState (vts),
+    valueSlider1(p, vts, "pLower1", "pUpper1", "pCurrent1"),
+    valueSlider2(p, vts, "pLower2", "pUpper2", "pCurrent2"),
+    valueSlider3(p, vts, "pLower3", "pUpper3", "pCurrent3"),
+    valueSlider4(p, vts, "pLower4", "pUpper4", "pCurrent4"),
+    valueSlider5(p, vts, "pLower5", "pUpper5", "pCurrent5")
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
@@ -36,25 +41,29 @@ SettingizerPluginEditor::SettingizerPluginEditor (SettingizerPluginProcessor& p,
     setUpCCBox(&ccSelector4, vts, "pCC4", ccSelectorAttach4);
     setUpCCBox(&ccSelector5, vts, "pCC5", ccSelectorAttach5);
 
-    setUpVSlider(&currentSlider1, vts, "pCurrent1", currentSliderAttach1);
+//    setUpVSlider(&currentSlider1, vts, "pCurrent1", currentSliderAttach1);
+    /**
     setUpVSlider(&currentSlider2, vts, "pCurrent2", currentSliderAttach2);
     setUpVSlider(&currentSlider3, vts, "pCurrent3", currentSliderAttach3);
     setUpVSlider(&currentSlider4, vts, "pCurrent4", currentSliderAttach4);
     setUpVSlider(&currentSlider5, vts, "pCurrent5", currentSliderAttach5);
-
-    setUpVSlider(&leftSlider1, vts, "pLower1", leftSliderAttach1);
+    /**/
+//    setUpVSlider(&leftSlider1, vts, "pLower1", leftSliderAttach1);
+    /**
     setUpVSlider(&leftSlider2, vts, "pLower2", leftSliderAttach2);
     setUpVSlider(&leftSlider3, vts, "pLower3", leftSliderAttach3);
     setUpVSlider(&leftSlider4, vts, "pLower4", leftSliderAttach4);
     setUpVSlider(&leftSlider5, vts, "pLower5", leftSliderAttach5);
-
+    /**/
     setUpHSlider(&mainSlider, vts, "mainController", mainSliderAttach);
-    setUpVSlider(&rightSlider1, vts, "pUpper1", rightSliderAttach1);
+//    setUpVSlider(&rightSlider1, vts, "pUpper1", rightSliderAttach1);
+/**
     setUpVSlider(&rightSlider2, vts, "pUpper2", rightSliderAttach2);
     setUpVSlider(&rightSlider3, vts, "pUpper3", rightSliderAttach3);
     setUpVSlider(&rightSlider4, vts, "pUpper4", rightSliderAttach4);
     setUpVSlider(&rightSlider5, vts, "pUpper5", rightSliderAttach5);
     addAndMakeVisible(ccLabelMain);
+    /**/
 //    ccLabelMain.setColour
     ccLabelMain.setText("Main CC", juce::NotificationType::dontSendNotification);
 
@@ -119,11 +128,19 @@ SettingizerPluginEditor::SettingizerPluginEditor (SettingizerPluginProcessor& p,
 
 void SettingizerPluginEditor::timerCallback()
 {
-    currentSlider1.setValue(*valueTreeState.getRawParameterValue("pCurrent1"));
+    valueSlider1.sliderUpdate(*valueTreeState.getRawParameterValue("pCurrent1"));
+    valueSlider2.sliderUpdate(*valueTreeState.getRawParameterValue("pCurrent2"));
+    valueSlider3.sliderUpdate(*valueTreeState.getRawParameterValue("pCurrent3"));
+    valueSlider4.sliderUpdate(*valueTreeState.getRawParameterValue("pCurrent4"));
+    valueSlider5.sliderUpdate(*valueTreeState.getRawParameterValue("pCurrent5"));
+
+//    currentSlider1.setValue(*valueTreeState.getRawParameterValue("pCurrent1"));
+/**
     currentSlider2.setValue(*valueTreeState.getRawParameterValue("pCurrent2"));
     currentSlider3.setValue(*valueTreeState.getRawParameterValue("pCurrent3"));
     currentSlider4.setValue(*valueTreeState.getRawParameterValue("pCurrent4"));
     currentSlider5.setValue(*valueTreeState.getRawParameterValue("pCurrent5"));
+    /**/
 }
 
 
@@ -143,6 +160,12 @@ void SettingizerPluginEditor::paint (juce::Graphics& g)
     g.setColour (juce::Colours::mintcream);
     g.setFont (30.0f);
     g.drawFittedText("Settingizer", 0, 0, 800, 40, juce::Justification::centredTop, 1);
+    addAndMakeVisible(valueSlider1);
+    addAndMakeVisible(valueSlider2);
+    addAndMakeVisible(valueSlider3);
+    addAndMakeVisible(valueSlider4);
+    addAndMakeVisible(valueSlider5);
+
 }
 
 void SettingizerPluginEditor::resized()
@@ -161,25 +184,32 @@ void SettingizerPluginEditor::resized()
     ccSelector3.setBounds(10, 175, 60, 25);
     ccSelector4.setBounds(10, 225, 60, 25);
     ccSelector5.setBounds(10, 275, 60, 25);
-    leftSlider1.setBounds(80, 10, 25, 280);
 
-    leftSlider1.setLookAndFeel(&llnf);
+    valueSlider1.setBounds(182, 25, 36, 200);
+    valueSlider2.setBounds(282, 25, 36, 200);
+    valueSlider3.setBounds(382, 25, 36, 200);
+    valueSlider4.setBounds(482, 25, 36, 200);
+    valueSlider5.setBounds(582, 25, 36, 200);
 
-    leftSlider2.setBounds(130, 10, 25, 280);
-    leftSlider3.setBounds(160, 10, 25, 280);
-    leftSlider4.setBounds(190, 10, 25, 280);
-    leftSlider5.setBounds(220, 10, 25, 280);
+    //    leftSlider1.setBounds(88, 10, 12, 280);
+
+//    leftSlider1.setLookAndFeel(&llnf);
+    
+//    leftSlider2.setBounds(130, 10, 25, 280);
+//    leftSlider3.setBounds(160, 10, 25, 280);
+//    leftSlider4.setBounds(190, 10, 25, 280);
+//    leftSlider5.setBounds(220, 10, 25, 280);
     leftLabel1.setBounds(100, 300, 25, 50);
     leftLabel2.setBounds(130, 300, 25, 50);
     leftLabel3.setBounds(160, 300, 25, 50);
     leftLabel4.setBounds(190, 300, 25, 50);
     leftLabel5.setBounds(220, 300, 25, 50);
-    currentSlider1.setBounds(100, 10, 12, 280);
+//    currentSlider1.setBounds(100, 10, 12, 280);
 //    currentSlider1.setBounds(325, 50, 18, 200);
-    currentSlider2.setBounds(358, 50, 18, 200);
-    currentSlider3.setBounds(391, 50, 18, 200);
-    currentSlider4.setBounds(424, 50, 18, 200);
-    currentSlider5.setBounds(457, 50, 18, 200);
+//    currentSlider2.setBounds(358, 50, 18, 200);
+//    currentSlider3.setBounds(391, 50, 18, 200);
+//    currentSlider4.setBounds(424, 50, 18, 200);
+//    currentSlider5.setBounds(457, 50, 18, 200);
     currentLabel1.setBounds(325, 260, 18, 50);
     currentLabel2.setBounds(358, 260, 18, 50);
     currentLabel3.setBounds(391, 260, 18, 50);
@@ -187,14 +217,14 @@ void SettingizerPluginEditor::resized()
     currentLabel5.setBounds(457, 260, 18, 50);
     mainSlider.setBounds(250, 300, 300, 50);
 
-    rightSlider1.setLookAndFeel(&rlnf);
+//    rightSlider1.setLookAndFeel(&rlnf);
 
-    rightSlider1.setBounds(145, 10, 25, 280);
+//    rightSlider1.setBounds(112, 10, 12, 280);
 //    rightSlider1.setBounds(580, 10, 25, 280);
-    rightSlider2.setBounds(610, 10, 25, 280);
-    rightSlider3.setBounds(640, 10, 25, 280);
-    rightSlider4.setBounds(670, 10, 25, 280);
-    rightSlider5.setBounds(700, 10, 25, 280);
+//    rightSlider2.setBounds(610, 10, 25, 280);
+//    rightSlider3.setBounds(640, 10, 25, 280);
+//    rightSlider4.setBounds(670, 10, 25, 280);
+//    rightSlider5.setBounds(700, 10, 25, 280);
     rightLabel1.setBounds(580, 300, 25, 50);
     rightLabel2.setBounds(610, 300, 25, 50);
     rightLabel3.setBounds(640, 300, 25, 50);
@@ -202,10 +232,6 @@ void SettingizerPluginEditor::resized()
     rightLabel5.setBounds(700, 300, 25, 50);
 
 
-
-
-    // This is generally where you'll want to lay out the positions of any
-    // subcomponents in your editor..
 }
 
 void SettingizerPluginEditor::setUpVSlider(juce::Slider* slider, juce::AudioProcessorValueTreeState& vts, juce::String paramId,
