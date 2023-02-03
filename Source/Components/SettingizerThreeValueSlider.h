@@ -28,7 +28,7 @@ class SettingizerThreeValueSlider : public juce::Component,
     public juce::Slider::Listener
 {
 public:
-    SettingizerThreeValueSlider(SettingizerPluginProcessor&, juce::AudioProcessorValueTreeState&, const juce::String, const juce::String, const juce::String);
+    SettingizerThreeValueSlider(SettingizerPluginProcessor&, juce::AudioProcessorValueTreeState&, const juce::String, const juce::String, const juce::String, const juce::Colour);
     ~SettingizerThreeValueSlider();
     typedef juce::AudioProcessorValueTreeState::SliderAttachment SliderAttachment;
     typedef juce::AudioProcessorValueTreeState::ButtonAttachment ButtonAttachment;
@@ -44,12 +44,14 @@ public:
 
 private:
     juce::Slider leftSlider, currentSlider, rightSlider;
+    juce::Rectangle<float> border;
     SettingizerLeftSliderLookAndFeel leftLNF;
     SettingizerRightSliderLookAndFeel rightLNF;
     SettingizerPluginProcessor& audioProcessor;
     juce::AudioProcessorValueTreeState& valueTreeState;
 
     juce::String paramIdLeft, paramIdRight, paramIdCurrent;
+    juce::Colour colour;
 
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> leftSliderAttach1, leftSliderAttach2, leftSliderAttach3, leftSliderAttach4, leftSliderAttach5;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> rightSliderAttach1, rightSliderAttach2, rightSliderAttach3, rightSliderAttach4, rightSliderAttach5;

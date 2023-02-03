@@ -17,7 +17,7 @@
 class SettingizerLeftSliderLookAndFeel : public SettingizerLookAndFeel
 {
 public:
-    SettingizerLeftSliderLookAndFeel::SettingizerLeftSliderLookAndFeel();
+    SettingizerLeftSliderLookAndFeel();
     void drawLinearSlider(juce::Graphics&, int, int, int, int, float, float, float, const juce::Slider::SliderStyle, juce::Slider&) override;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SettingizerLeftSliderLookAndFeel)

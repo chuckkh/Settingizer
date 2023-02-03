@@ -12,11 +12,11 @@
 //==============================================================================
 SettingizerPluginEditor::SettingizerPluginEditor (SettingizerPluginProcessor& p, juce::AudioProcessorValueTreeState& vts)
     : AudioProcessorEditor (&p), audioProcessor (p), valueTreeState (vts),
-    valueSlider1(p, vts, "pLower1", "pUpper1", "pCurrent1"),
-    valueSlider2(p, vts, "pLower2", "pUpper2", "pCurrent2"),
-    valueSlider3(p, vts, "pLower3", "pUpper3", "pCurrent3"),
-    valueSlider4(p, vts, "pLower4", "pUpper4", "pCurrent4"),
-    valueSlider5(p, vts, "pLower5", "pUpper5", "pCurrent5")
+    valueSlider1(p, vts, "pLower1", "pUpper1", "pCurrent1", juce::Colours::cyan),
+    valueSlider2(p, vts, "pLower2", "pUpper2", "pCurrent2", juce::Colours::purple),
+    valueSlider3(p, vts, "pLower3", "pUpper3", "pCurrent3", juce::Colours::yellow),
+    valueSlider4(p, vts, "pLower4", "pUpper4", "pCurrent4", juce::Colours::sienna),
+    valueSlider5(p, vts, "pLower5", "pUpper5", "pCurrent5", juce::Colours::turquoise)
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
@@ -65,8 +65,11 @@ SettingizerPluginEditor::SettingizerPluginEditor (SettingizerPluginProcessor& p,
     addAndMakeVisible(ccLabelMain);
     /**/
 //    ccLabelMain.setColour
-    ccLabelMain.setText("Main CC", juce::NotificationType::dontSendNotification);
-
+    ccLabelMain.setText("Main Slider CC #", juce::NotificationType::dontSendNotification);
+    ccLabelRow.setText("MIDI CC #", juce::NotificationType::dontSendNotification);
+    addAndMakeVisible(ccLabelMain);
+    addAndMakeVisible(ccLabelRow);
+/**
     ccLabel1.setText("CC 1", juce::NotificationType::dontSendNotification);
     ccLabel2.setText("CC 2", juce::NotificationType::dontSendNotification);
     ccLabel3.setText("CC 3", juce::NotificationType::dontSendNotification);
@@ -77,6 +80,7 @@ SettingizerPluginEditor::SettingizerPluginEditor (SettingizerPluginProcessor& p,
     addAndMakeVisible(ccLabel3);
     addAndMakeVisible(ccLabel4);
     addAndMakeVisible(ccLabel5);
+
     addAndMakeVisible(leftLabel1);
     addAndMakeVisible(leftLabel2);
     addAndMakeVisible(leftLabel3);
@@ -87,7 +91,6 @@ SettingizerPluginEditor::SettingizerPluginEditor (SettingizerPluginProcessor& p,
     leftLabel3.setText("L3", juce::NotificationType::dontSendNotification);
     leftLabel4.setText("L4", juce::NotificationType::dontSendNotification);
     leftLabel5.setText("L5", juce::NotificationType::dontSendNotification);
-
 
     addAndMakeVisible(currentLabel1);
     addAndMakeVisible(currentLabel2);
@@ -110,7 +113,7 @@ SettingizerPluginEditor::SettingizerPluginEditor (SettingizerPluginProcessor& p,
     rightLabel3.setText("R3", juce::NotificationType::dontSendNotification);
     rightLabel4.setText("R4", juce::NotificationType::dontSendNotification);
     rightLabel5.setText("R5", juce::NotificationType::dontSendNotification);
-
+/**/
 
 
     /*
@@ -157,7 +160,7 @@ void SettingizerPluginEditor::paint (juce::Graphics& g)
     // (Our component is opaque, so we must completely fill the background with a solid colour)
 //    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
     g.drawImageAt(lnf.backgroundImg, 0, 0, false);
-    g.setColour (juce::Colours::mintcream);
+    g.setColour (juce::Colours::darkkhaki);
     g.setFont (30.0f);
     g.drawFittedText("Settingizer", 0, 0, 800, 40, juce::Justification::centredTop, 1);
     addAndMakeVisible(valueSlider1);
@@ -170,26 +173,34 @@ void SettingizerPluginEditor::paint (juce::Graphics& g)
 
 void SettingizerPluginEditor::resized()
 {
-    ccLabelMain.setBounds(5, 8, 60, 10);
+    ccLabelMain.setBounds(10, 60, 120, 25);
+    ccLabelRow.setBounds(100, 250, 60, 25);
+/**
     ccLabel1.setBounds(10, 53, 60, 25);
     ccLabel2.setBounds(10, 103, 60, 25);
     ccLabel3.setBounds(10, 153, 60, 25);
     ccLabel4.setBounds(10, 203, 60, 25);
     ccLabel5.setBounds(10, 253, 60, 25);
+/**/
+    ccSelectorMain.setBounds(10, 87, 60, 30);
 
-    ccSelectorMain.setBounds(5, 20, 60, 30);
-
-    ccSelector1.setBounds(10, 75, 60, 25);
-    ccSelector2.setBounds(10, 125, 60, 25);
-    ccSelector3.setBounds(10, 175, 60, 25);
-    ccSelector4.setBounds(10, 225, 60, 25);
-    ccSelector5.setBounds(10, 275, 60, 25);
-
+    ccSelector1.setBounds(170, 250, 60, 25);
+    ccSelector2.setBounds(270, 250, 60, 25);
+    ccSelector3.setBounds(370, 250, 60, 25);
+    ccSelector4.setBounds(470, 250, 60, 25);
+    ccSelector5.setBounds(570, 250, 60, 25);
+/**
     valueSlider1.setBounds(182, 25, 36, 200);
     valueSlider2.setBounds(282, 25, 36, 200);
     valueSlider3.setBounds(382, 25, 36, 200);
     valueSlider4.setBounds(482, 25, 36, 200);
     valueSlider5.setBounds(582, 25, 36, 200);
+/**/
+    valueSlider1.setBounds(150, 35, 100, 200);
+    valueSlider2.setBounds(250, 35, 100, 200);
+    valueSlider3.setBounds(350, 35, 100, 200);
+    valueSlider4.setBounds(450, 35, 100, 200);
+    valueSlider5.setBounds(550, 35, 100, 200);
 
     //    leftSlider1.setBounds(88, 10, 12, 280);
 

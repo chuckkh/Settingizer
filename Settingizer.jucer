@@ -2,7 +2,8 @@
 
 <JUCERPROJECT id="Pawiih" name="Settingizer" projectType="audioplug" useAppConfig="0"
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" companyName="CloudInTheHeads"
-              pluginFormats="buildAAX,buildAU,buildLV2,buildVST3" pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn">
+              pluginFormats="buildAAX,buildAU,buildLV2,buildStandalone,buildVST3"
+              pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn">
   <MAINGROUP id="ksP35K" name="Settingizer">
     <GROUP id="{13E29CE5-13D8-1362-51FA-0D63F903C26D}" name="Source">
       <GROUP id="{5ECF5703-C09D-2061-74AE-0BF6A935E352}" name="Components">

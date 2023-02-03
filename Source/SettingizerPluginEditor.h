@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <JuceHeader.h>
+#include "../JuceLibraryCode/JuceHeader.h"
 #include "SettingizerPluginProcessor.h"
 #include "Graphics/SettingizerLookAndFeel.h"
 #include "Graphics/SettingizerLeftSliderLookAndFeel.h"
@@ -61,7 +61,7 @@ private:
 
 
     juce::ComboBox ccSelector1, ccSelector2, ccSelector3, ccSelector4, ccSelector5, ccSelectorMain;
-    juce::Label ccLabel1, ccLabel2, ccLabel3, ccLabel4, ccLabel5, ccLabelMain;
+    juce::Label ccLabel1, ccLabel2, ccLabel3, ccLabel4, ccLabel5, ccLabelMain, ccLabelRow;
     //juce::Slider leftSlider1, leftSlider2, leftSlider3, leftSlider4, leftSlider5;
     juce::Slider leftSlider1, leftSlider2, leftSlider3, leftSlider4, leftSlider5;
     juce::Label leftLabel1, leftLabel2, leftLabel3, leftLabel4, leftLabel5;
