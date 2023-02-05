@@ -36,7 +36,7 @@ public:
 
     void paint(juce::Graphics&) override;
     void resized() override;
-    void juce::Slider::Listener::sliderValueChanged(juce::Slider*);
+    void sliderValueChanged(juce::Slider*);
 // This encapsulates the basic setup for each of the 3 vertical sliders.
     void setUpVSlider(juce::Slider*, juce::AudioProcessorValueTreeState&, juce::String, std::unique_ptr<SliderAttachment>&);
 

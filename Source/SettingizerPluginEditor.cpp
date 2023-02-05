@@ -159,7 +159,7 @@ void SettingizerPluginEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
 //    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-    g.drawImageAt(lnf.backgroundImg, 0, 0, false);
+//    g.drawImageAt(lnf.backgroundImg, 0, 0, false);
     g.setColour (juce::Colours::darkkhaki);
     g.setFont (30.0f);
     g.drawFittedText("Settingizer", 0, 0, 800, 40, juce::Justification::centredTop, 1);

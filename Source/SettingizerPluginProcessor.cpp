@@ -358,7 +358,7 @@ juce::AudioProcessor::BusesProperties SettingizerPluginProcessor::getBusesLayout
     // Live doesn't like to load midi-only plugins, so we add an audio output there.
     // From Juce example MidiLoggerPluginDemo.h
     // (Copyright (c) 2022 - Raw Material Software Limited)
-    return juce::PluginHostType::PluginHostType().isAbletonLive() ? BusesProperties().withOutput("out", juce::AudioChannelSet::stereo())
+    return juce::PluginHostType().isAbletonLive() ? BusesProperties().withOutput("out", juce::AudioChannelSet::stereo())
         : BusesProperties();
 
 }
